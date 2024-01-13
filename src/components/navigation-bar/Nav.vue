@@ -37,7 +37,7 @@ const navItems = reactive([
 </template>
 <style scoped>
 .header {
-  @apply flex justify-between container py-6 border-b border-solid border-b-slate-400 mb-10
+  @apply flex justify-between container py-6 border-b border-solid border-b-slate-400 xl:mb-10
 }
 .header_left-side {
   @apply flex gap-x-7 items-center
