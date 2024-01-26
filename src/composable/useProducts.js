@@ -66,5 +66,3 @@ if(trueKeys === objectKeys) {
 } else {
   localStorage.setItem("products", JSON.stringify(products));
 }
-trueKeys === objectKeys
-console.log("object");
