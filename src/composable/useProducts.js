@@ -1,5 +1,4 @@
-import { reactive } from "vue";
-export const products = reactive([
+const products = [
   {
     id: 1,
     thumbnail: "/src/assets/products/product-1/product.jpg",
@@ -9,36 +8,56 @@ export const products = reactive([
     desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo quasi culpa dolor, ullam repellat, voluptate perferendis nisi molestias delectus ipsam maiores et, fugiat aspernatur voluptatem numquam eos neque quis harum!",
     price: 199.0,
     offer: 34,
-    count: localStorage.getItem("product-count") || localStorage.setItem("product-count", 0),
+    count: 0,
     images: [
       {
         id: 1,
         src: "/src/assets/products/product-1/product.jpg",
         thumbnail: "/src/assets/products/product-1/product-thumbnail.jpg",
         alternate: "product 1",
-        active: true
+        active: true,
       },
       {
         id: 2,
         src: "/src/assets/products/product-2/product.jpg",
         thumbnail: "/src/assets/products/product-2/product-thumbnail.jpg",
         alternate: "product 2",
-        active: false
+        active: false,
       },
       {
         id: 3,
         src: "/src/assets/products/product-3/product.jpg",
         thumbnail: "/src/assets/products/product-3/product-thumbnail.jpg",
         alternate: "product 3",
-        active: false
+        active: false,
       },
       {
         id: 4,
         src: "/src/assets/products/product-4/product.jpg",
         thumbnail: "/src/assets/products/product-4/product-thumbnail.jpg",
         alternate: "product 4",
-        active: false
+        active: false,
       },
     ],
-  }
-]);
+  },
+];
+
+let trueKeys = 0;
+let objectKeys = 0;
+products.forEach((item, index) => {
+  // console.log(item);
+  // console.log(JSON.parse(localStorage.getItem("products"))[index]);
+
+  Object.keys(item).forEach((_item, _index) => {
+    objectKeys++
+    if (
+      _item ===
+      (localStorage.getItem("products")&&Object.keys(JSON.parse(localStorage.getItem("products"))[index])[_index])
+    ) {
+      trueKeys++;
+    }
+  });
+});
+trueKeys===objectKeys
+? console.log(false)
+: localStorage.setItem("products", JSON.stringify(products));

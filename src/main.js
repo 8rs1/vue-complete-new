@@ -1,5 +1,6 @@
 import './style.css'
 
+import "@/composable/useProducts.js";
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'

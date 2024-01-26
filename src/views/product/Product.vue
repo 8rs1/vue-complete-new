@@ -1,8 +1,6 @@
 <template>
-  {{ $route.params.ID }}
-
   <transition name="alert">
-    <MajorShoppingAlert v-if="isMoreThat20Products" />
+    <MajorShoppingAlert v-if="isMoreThan20Products" />
   </transition>
 
   <main class="xl:flex gap-x-28 container" v-if="product">
@@ -95,8 +93,8 @@ import { reactive, ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 
 // data
-import { products } from "@/composable/useProducts.js";
-
+// import products from "@/composable/useProducts.js";
+const products = JSON.parse(localStorage.getItem("products"))
 // icons
 import MinusIcon from "@/components/svgs/icons/Minus.vue";
 import PlusIcon from "@/components/svgs/icons/Plus.vue";
@@ -106,24 +104,23 @@ import NextIcon from "@/components/svgs/icons/Next.vue";
 
 // components
 import MajorShoppingAlert from "@/components/alerts/MajorShoppingAlert.vue";
-
 const product = ref(products[useRoute().params.id - 1]);
 const productCount = ref(null);
-const isMoreThat20Products = productCount.value >= 20 ? ref(true) : ref(false);
+const isMoreThan20Products = productCount.value >= 20 ? ref(true) : ref(false);
 let fadeAlert = false;
 onMounted(() => {
   // console.log(Boolean(localStorage.getItem("product-count")));
-  productCount.value = localStorage.getItem("product-count");
+  productCount.value = JSON.parse(localStorage.getItem("products"))[useRoute().params.id - 1].count;
 });
 function changeCount(increase = true) {
-  isMoreThat20Products.value = false;
+  isMoreThan20Products.value = false;
   if (!increase && productCount.value <= 0) {
     localStorage.setItem("product-count", 0);
   } else if (increase && productCount.value >= 20) {
-    isMoreThat20Products.value = true;
-    fadeAlert && clearTimeout(fadeAlert)
+    isMoreThan20Products.value = true;
+    fadeAlert && clearTimeout(fadeAlert);
     fadeAlert = setTimeout(() => {
-      isMoreThat20Products.value = false;
+      isMoreThan20Products.value = false;
     }, 6000);
   } else if (increase) {
     localStorage.setItem("product-count", Number(productCount.value) + 1);

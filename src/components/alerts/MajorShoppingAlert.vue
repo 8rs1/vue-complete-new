@@ -7,7 +7,7 @@
       <div>Please use the button below for bulk purchases&#128071;</div>
     </div>
     <RouterLink to="/">
-      <div class="bg-green-400 text-center p-1 rounded-sm">Bulk Purchases</div>
+      <div class="bg-orange-600 text-white text-center p-1 rounded-sm">Bulk Purchases</div>
     </RouterLink>
   </div>
 </template>
