@@ -94,7 +94,8 @@ import { useRoute } from "vue-router";
 
 // data
 // import products from "@/composable/useProducts.js";
-const products = JSON.parse(localStorage.getItem("products"))
+const products = JSON.parse(localStorage.getItem("products"));
+const currentproduct = products[useRoute().params.id-1]
 // icons
 import MinusIcon from "@/components/svgs/icons/Minus.vue";
 import PlusIcon from "@/components/svgs/icons/Plus.vue";
@@ -104,18 +105,18 @@ import NextIcon from "@/components/svgs/icons/Next.vue";
 
 // components
 import MajorShoppingAlert from "@/components/alerts/MajorShoppingAlert.vue";
-const product = ref(products[useRoute().params.id - 1]);
+const product = ref(currentproduct);
 const productCount = ref(null);
 const isMoreThan20Products = productCount.value >= 20 ? ref(true) : ref(false);
 let fadeAlert = false;
 onMounted(() => {
   // console.log(Boolean(localStorage.getItem("product-count")));
-  productCount.value = JSON.parse(localStorage.getItem("products"))[useRoute().params.id - 1].count;
+  productCount.value = currentproduct.count;
 });
 function changeCount(increase = true) {
   isMoreThan20Products.value = false;
   if (!increase && productCount.value <= 0) {
-    localStorage.setItem("product-count", 0);
+    // localStorage.setItem("products")
   } else if (increase && productCount.value >= 20) {
     isMoreThan20Products.value = true;
     fadeAlert && clearTimeout(fadeAlert);
@@ -123,11 +124,20 @@ function changeCount(increase = true) {
       isMoreThan20Products.value = false;
     }, 6000);
   } else if (increase) {
-    localStorage.setItem("product-count", Number(productCount.value) + 1);
+    currentproduct.count++
+    localStorage.setItem(
+      "products",
+      JSON.stringify(products)
+    );
   } else if (!increase) {
+    currentproduct.count--
+    localStorage.setItem(
+      "products",
+      JSON.stringify(products)
+    );
     localStorage.setItem("product-count", Number(productCount.value) - 1);
   }
-  productCount.value = localStorage.getItem("product-count");
+  productCount.value = currentproduct.count;
 }
 console.log(Boolean(NaN));
 const images = reactive([

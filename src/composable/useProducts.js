@@ -52,7 +52,7 @@ products.forEach((item, index) => {
     objectKeys++
     if (
       _item ===
-      (localStorage.getItem("products")&&Object.keys(JSON.parse(localStorage.getItem("products"))[index])[_index])
+      (typeof localStorage.getItem("products") === Object && Object.keys(JSON.parse(localStorage.getItem("products"))[index])[_index])
     ) {
       trueKeys++;
     }
