@@ -1,5 +1,10 @@
 <template>
   {{ $route.params.ID }}
+
+  <transition name="alert">
+    <MajorShoppingAlert v-if="isMoreThat20Products" />
+  </transition>
+
   <main class="xl:flex gap-x-28 container" v-if="product">
     <div class="flex flex-col items-center">
       <div
@@ -59,15 +64,15 @@
           class="bg-slate-100 rounded-lg sm:mb-0 mb-3 flex flex-wrap items-center justify-between"
         >
           <div
-            class="p-6 cursor-pointer border-r-2 border-solid border-slate-200"
-            @click="product.count > 0 && product.count--"
+            class="p-6 cursor-pointer border-r-2 border-solid border-slate-200 select-none"
+            @click="() => changeCount(false)"
           >
             <MinusIcon />
           </div>
           <div class="px-8">{{ productCount }}</div>
           <div
-            class="p-6 cursor-pointer border-l-2 border-solid border-slate-200"
-            @click="()=>changeCount()"
+            class="p-6 cursor-pointer border-l-2 border-solid border-slate-200 select-none"
+            @click="() => changeCount(true)"
           >
             <PlusIcon />
           </div>
@@ -99,16 +104,33 @@ import CartIcon from "@/components/svgs/icons/Cart.vue";
 import PreviousIcon from "@/components/svgs/icons/Previous.vue";
 import NextIcon from "@/components/svgs/icons/Next.vue";
 
+// components
+import MajorShoppingAlert from "@/components/alerts/MajorShoppingAlert.vue";
+
 const product = ref(products[useRoute().params.id - 1]);
 const productCount = ref(null);
+const isMoreThat20Products = productCount.value >= 20 ? ref(true) : ref(false);
+let fadeAlert = false;
 onMounted(() => {
+  // console.log(Boolean(localStorage.getItem("product-count")));
   productCount.value = localStorage.getItem("product-count");
 });
-function changeCount (increase = true) {
-  increase
-    ? localStorage.setItem("product-count", parseInt(productCount.value)+1)
-    : localStorage.setItem("product-count", parseInt(productCount.value)-1);
-  productCount.value = localStorage.getItem("product-count")
+function changeCount(increase = true) {
+  isMoreThat20Products.value = false;
+  if (!increase && productCount.value <= 0) {
+    localStorage.setItem("product-count", 0);
+  } else if (increase && productCount.value >= 20) {
+    isMoreThat20Products.value = true;
+    fadeAlert && clearTimeout(fadeAlert)
+    fadeAlert = setTimeout(() => {
+      isMoreThat20Products.value = false;
+    }, 6000);
+  } else if (increase) {
+    localStorage.setItem("product-count", Number(productCount.value) + 1);
+  } else if (!increase) {
+    localStorage.setItem("product-count", Number(productCount.value) - 1);
+  }
+  productCount.value = localStorage.getItem("product-count");
 }
 console.log(Boolean(NaN));
 const images = reactive([
@@ -168,3 +190,14 @@ const arrowImage = (next = true) => {
   console.log(activeImage.value);
 };
 </script>
+
+<style scoped>
+.alert-enter-active,
+.alert-leave-active {
+  @apply transition-all duration-150 ease-linear;
+}
+.alert-enter-from,
+.alert-leave-to {
+  @apply opacity-0;
+}
+</style>
