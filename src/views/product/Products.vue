@@ -16,5 +16,10 @@
 </template>
 <script setup>
 import ProductCard from "@/components/ProductCard.vue";
-import { products } from "@/composable/useProducts.js";
+import { onMounted, ref } from "vue";
+const products = ref(null)
+onMounted(()=> {
+  products.value = JSON.parse(localStorage.getItem('products'))
+})
+// import { products } from "@/composable/useProducts.js";
 </script>

@@ -116,7 +116,7 @@ onMounted(() => {
 function changeCount(increase = true) {
   isMoreThan20Products.value = false;
   if (!increase && productCount.value <= 0) {
-    // localStorage.setItem("products")
+    console.log("less than zero!");
   } else if (increase && productCount.value >= 20) {
     isMoreThan20Products.value = true;
     fadeAlert && clearTimeout(fadeAlert);

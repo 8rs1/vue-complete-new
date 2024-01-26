@@ -41,7 +41,10 @@ const products = [
     ],
   },
 ];
-
+console.log(JSON.parse(localStorage.getItem("products")));
+if(!Array.isArray(JSON.parse(localStorage.getItem("products")))) {
+  localStorage.setItem("products", JSON.stringify(products));
+}
 let trueKeys = 0;
 let objectKeys = 0;
 products.forEach((item, index) => {
@@ -49,15 +52,19 @@ products.forEach((item, index) => {
   // console.log(JSON.parse(localStorage.getItem("products"))[index]);
 
   Object.keys(item).forEach((_item, _index) => {
-    objectKeys++
+    objectKeys++;
     if (
       _item ===
-      (typeof localStorage.getItem("products") === Object && Object.keys(JSON.parse(localStorage.getItem("products"))[index])[_index])
+      Object.keys(JSON.parse(localStorage.getItem("products"))[index])[_index]
     ) {
       trueKeys++;
     }
   });
 });
-trueKeys===objectKeys
-? console.log(false)
-: localStorage.setItem("products", JSON.stringify(products));
+if(trueKeys === objectKeys) {
+  console.log(false)
+} else {
+  localStorage.setItem("products", JSON.stringify(products));
+}
+trueKeys === objectKeys
+console.log("object");
