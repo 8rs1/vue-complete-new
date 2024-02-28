@@ -152,7 +152,7 @@ const navItems = reactive([
 .product-wrapper__picture{
 
 }
-.product-wrapper__picture--img{
+.product-wrapper__picture--img {
   width: 100%;
 }
 .product-wrapper__title-price{
