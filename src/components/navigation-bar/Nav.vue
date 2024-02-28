@@ -49,10 +49,12 @@ const navItems = reactive([
                 <img src="../../assets/products/product-1/product-thumbnail.jpg" alt="" class="product-wrapper__picture--img">
               </div>
               <div class="product-wrapper__title-price">
-                <div class="product-wrapper__title"></div>
-                <div class="product-wrapper__price"></div>
+                <div class="product-wrapper__title">fall limited edition sneakers</div>
+                <div class="product-wrapper__price">$125.00 * 3 $375.00</div>
               </div>
-              <div class="product-wrapper__icon"></div>
+              <div class="product-wrapper__icon">
+                <bucket></bucket>
+              </div>
             </div>
             <div class="button-wrapper"></div>
           </div>
@@ -121,7 +123,7 @@ const navItems = reactive([
 .box-white{
   /* display: none; */
   background-color: rgb(255, 255, 255);
-  width: 20rem;
+  width: 21rem;
   height: 13rem;
   box-shadow: 2px 11px 25px hsl(220, 14%, 75%);
   border-radius: 6px;
@@ -139,33 +141,58 @@ const navItems = reactive([
 .box-white__top--text{
   font-weight: bold;
 }
-.box-white__bottom{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80%;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+.box-white__bottom{
+  height: 80%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 } 
 .product-wrapper{
-
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 20rem;
 }
 .product-wrapper__picture{
-
+  flex-basis: 15%;
+  border-radius: 4px;
+  overflow: hidden;
 }
 .product-wrapper__picture--img {
   width: 100%;
 }
 .product-wrapper__title-price{
-
+  display: flex;
+  flex-direction: column;
+  flex-basis: 57%;
 }
 .product-wrapper__title{
-
+  font-size: 14px;
+  font-weight: bold;
+  color: hsl(219, 9%, 45%);
 }
 .product-wrapper__price{
 
 }
 .product-wrapper__icon{
-
+  flex-basis: 15%;
+  display: flex;
+  justify-content: center;
 }
 .button-wrapper{
 
