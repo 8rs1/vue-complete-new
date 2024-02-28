@@ -50,13 +50,15 @@ let whiteBoxFlag = ref(false);
             </div>
             <div class="product-wrapper__title-price">
               <div class="product-wrapper__title">fall limited edition sneakers</div>
-              <div class="product-wrapper__price">$125.00 * 3 $375.00</div>
+              <div class="product-wrapper__price"><span class="product-wrapper__title">$125.00 * 3<span class="product-wrapper__price--bold">$375.00</span></span></div>
             </div>
             <div class="product-wrapper__icon">
               <bucket></bucket>
             </div>
           </div>
-          <div class="button-wrapper"></div>
+          <div class="button-wrapper">
+            <button class="button-wrapper--button">Checkout</button>
+          </div>
         </div>
       </div>
       <div>
@@ -92,12 +94,12 @@ let whiteBoxFlag = ref(false);
 .box-white__top--text {
   @apply font-bold;
 }
-.box-white__bottom{
+/* .box-white__bottom{
   height: 80%;
   display: flex;
   align-items: center;
   flex-direction: column;
-} 
+}  */
 .product-wrapper{
   padding-top: 1rem;
   display: flex;
@@ -110,9 +112,6 @@ let whiteBoxFlag = ref(false);
   border-radius: 4px;
   overflow: hidden;
 }
-.box-white__bottom{
-  @apply flex justify-center items-center h-4/5;
-}
 .product-wrapper__picture--img {
   @apply w-full;
 }
@@ -123,11 +122,16 @@ let whiteBoxFlag = ref(false);
 }
 .product-wrapper__title{
   font-size: 14px;
-  font-weight: bold;
+  /* font-weight: bold; */
   color: hsl(219, 9%, 45%);
 }
 .product-wrapper__price{
-
+  
+}
+.product-wrapper__price--bold{
+  font-weight: bold;
+  margin-left: 5px;
+  color: black;
 }
 .product-wrapper__icon{
   flex-basis: 15%;
@@ -135,7 +139,17 @@ let whiteBoxFlag = ref(false);
   justify-content: center;
 }
 .button-wrapper{
-
+  text-align: center;
+  padding-top: 2.3rem;
+}
+.button-wrapper--button{
+  background-color: rgb(255, 145, 0);
+  width: 19rem;
+  height: 3rem;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
 }
 /* Card Shop */
 .header {
