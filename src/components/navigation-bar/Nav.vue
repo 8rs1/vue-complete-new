@@ -26,8 +26,11 @@ const navItems = reactive([
       </nav>
     </div>
     <div class="header_right-side">
-      <div>
-        <cartIcon class="fill-slate-600"/>
+      <div class="realtive">
+        <cartIcon class="fill-slate-600" />
+        <div
+          class="absolute h-40 w-64 bg-white shadow-md shadow-slate-400 "
+        ></div>
       </div>
       <div>
         <img src="@/assets/avatars/avatar-1.png" class="w-12" />
@@ -37,21 +40,21 @@ const navItems = reactive([
 </template>
 <style scoped>
 .header {
-  @apply flex justify-between container py-6 border-b border-solid border-b-slate-400 xl:mb-10
+  @apply flex justify-between container py-6 border-b border-solid border-b-slate-400 xl:mb-10;
 }
 .header_left-side {
-  @apply flex gap-x-7 items-center
+  @apply flex gap-x-7 items-center;
 }
 .logobar {
-  @apply font-bold text-2xl font-serif
+  @apply font-bold text-2xl font-serif;
 }
 .nav-list {
-  @apply flex gap-x-5
+  @apply flex gap-x-5;
 }
 .nav-item {
-  @apply text-slate-600 hover:text-black
+  @apply text-slate-600 hover:text-black;
 }
 .header_right-side {
-  @apply flex items-center gap-4
+  @apply flex items-center gap-4;
 }
 </style>
