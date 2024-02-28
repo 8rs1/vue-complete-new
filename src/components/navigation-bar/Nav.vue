@@ -100,25 +100,20 @@ let whiteBoxFlag = ref(false);
   align-items: center;
   flex-direction: column;
 }  */
+.box-white__bottom{
+  @apply h-4/5 flex items-center flex-col
+} 
 .product-wrapper{
-  padding-top: 1rem;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 20rem;
+  @apply pt-4 flex justify-around items-center w-80
 }
 .product-wrapper__picture{
-  flex-basis: 15%;
-  border-radius: 4px;
-  overflow: hidden;
+  @apply basis-2/12 rounded-md overflow-hidden
 }
 .product-wrapper__picture--img {
   @apply w-full;
 }
 .product-wrapper__title-price{
-  display: flex;
-  flex-direction: column;
-  flex-basis: 57%;
+  @apply flex flex-col basis-1/2 
 }
 .product-wrapper__title{
   font-size: 14px;
@@ -150,6 +145,10 @@ let whiteBoxFlag = ref(false);
   color: white;
   font-weight: bold;
   font-size: 15px;
+  @apply text-sm font-bold text-[hsl(219,9%,45%)]
+}
+.product-wrapper__icon{
+  @apply basis-1/6 flex justify-center
 }
 /* Card Shop */
 .header {
