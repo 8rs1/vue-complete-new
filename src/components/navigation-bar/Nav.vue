@@ -99,7 +99,10 @@ function deleteProductFromBasket(productObj) {
                 <bucket className="fill-[#C3CAD9] group-hover:fill-red-500" />
               </div>
             </div>
-            <div class="button-wrapper">
+            <div class="button-wrapper" 
+              v-for="basketItem in basketItems"
+              :key="basketItem.id"
+            >
               <button class="button-wrapper--button">Checkout</button>
             </div>
             <!-- <div class="product-wrapper">
