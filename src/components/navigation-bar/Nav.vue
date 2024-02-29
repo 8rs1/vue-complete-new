@@ -46,8 +46,7 @@ function deleteProductFromBasket(productObj) {
           <li
             v-for="navItem in navItems"
             :key="navItem.id"
-            :class="navItem.className"
-          >
+            :class="navItem.className">
             <RouterLink :to="navItem.target">{{ navItem.title }}</RouterLink>
           </li>
         </ul>
@@ -55,9 +54,8 @@ function deleteProductFromBasket(productObj) {
     </div>
     <div class="header_right-side">
       <cartIcon
-        class="fill-slate-600 icone-sabad select-none cursor-pointer"
-        @click="whiteBoxFlag = !whiteBoxFlag"
-      />
+      class="fill-slate-600 icone-sabad select-none cursor-pointer"
+      @click="whiteBoxFlag = !whiteBoxFlag"/>
       <div v-if="whiteBoxFlag" class="box-white">
         <div class="box-white__top">
           <p class="box-white__top--text">Cart</p>
@@ -69,14 +67,13 @@ function deleteProductFromBasket(productObj) {
             <div
               class="product-wrapper"
               v-for="basketItem in basketItems"
-              :key="basketItem.id"
-            >
+              :key="basketItem.id"> 
               <div class="product-wrapper__picture">
                 <img
                   :src="'../../..' + basketItem.thumbnail"
                   :alt="basketItem.title"
                   class="product-wrapper__picture--img"
-                />
+                  />
               </div>
               <div class="product-wrapper__title-price">
                 <div class="product-wrapper__title">
@@ -86,7 +83,7 @@ function deleteProductFromBasket(productObj) {
                   ${{
                     (basketItem.price * (basketItem.offer / 100)).toFixed(2)
                   }}
-                  x {{ basketItem.count }} ${{
+                  x{{ basketItem.count }} ${{
                     (basketItem.price * (basketItem.offer / 100)).toFixed(2) *
                     basketItem.count
                   }}
@@ -94,9 +91,8 @@ function deleteProductFromBasket(productObj) {
               </div>
               <div
                 class="product-wrapper__icon group cursor-pointer"
-                @click="deleteProductFromBasket(basketItem)"
-              >
-                <bucket className="fill-[#C3CAD9] group-hover:fill-red-500" />
+                @click="deleteProductFromBasket(basketItem)">
+                <bucket className="fill-[#C3CAD9] group-hover:fill-red-500"/>
               </div>
             </div>
             <!-- <div class="product-wrapper">
@@ -117,7 +113,9 @@ function deleteProductFromBasket(productObj) {
                 <bucket fill="" />
               </div>
             </div> -->
-          <div class="product-wrapper">
+          </div>
+          <!-- product wrapper fakee -->
+          <!-- <div class="product-wrapper">
             <div class="product-wrapper__picture">
               <img
                 src="../../assets/products/product-1/product-thumbnail.jpg"
@@ -136,7 +134,8 @@ function deleteProductFromBasket(productObj) {
           <div class="button-wrapper">Checkout</div>
           <div class="button-wrapper">
             <button class="button-wrapper--button">Checkout</button>
-          </div>
+          </div> -->
+          <!-- product wrapper fakee -->
         </div>
       </div>
       <!-- menu-bar start -->
@@ -202,12 +201,6 @@ function deleteProductFromBasket(productObj) {
 .product-wrapper {
   @apply flex justify-between items-center mb-2 px-3;
 }
-/* .box-white__bottom{
-  height: 80%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}  */
 .box-white__bottom{
   @apply h-4/5 flex items-center flex-col
 } 
