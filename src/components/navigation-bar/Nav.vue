@@ -2,6 +2,7 @@
 import { reactive, ref } from "vue";
 import cartIcon from "@/components/svgs/icons/Cart.vue";
 import bucket from "@/components/svgs/icons/Delete.vue";
+import close from "@/components/svgs/icons/Close.vue";
 const navItems = reactive([
   { id: 1, title: "Collections", className: "nav-item", target: "/" },
   { id: 2, title: "Men", className: "nav-item", target: "/" },
@@ -61,6 +62,22 @@ let whiteBoxFlag = ref(false);
           </div>
         </div>
       </div>
+      <!-- menu-bar start -->
+      <div class="menu-left">
+        <div class="menu-left__icon">
+          <close></close>
+        </div>
+        <div class="menu-left__nav">
+          <ul class="menu-left--menu">
+            <li class="menu-left--item">Collections</li>
+            <li class="menu-left--item">Men</li>
+            <li class="menu-left--item">Women</li>
+            <li class="menu-left--item">About</li>
+            <li class="menu-left--item">Contact</li>
+          </ul>
+        </div>
+      </div>
+      <!-- menu-bar end -->
       <div>
         <img src="@/assets/avatars/avatar-1.png" class="w-12" />
       </div>
@@ -113,39 +130,30 @@ let whiteBoxFlag = ref(false);
   @apply w-full;
 }
 .product-wrapper__title-price{
-  @apply flex flex-col basis-1/2 
+  @apply flex flex-col basis-[53%]; 
 }
 .product-wrapper__title{
-  font-size: 14px;
-  /* font-weight: bold; */
+  @apply text-[14px]; 
   color: hsl(219, 9%, 45%);
 }
 .product-wrapper__price{
   
 }
 .product-wrapper__price--bold{
-  font-weight: bold;
-  margin-left: 5px;
+  @apply font-bold ml-[5px];
   color: black;
 }
 .product-wrapper__icon{
-  flex-basis: 15%;
-  display: flex;
-  justify-content: center;
+  @apply basis-[15%] flex justify-center;
 }
 .button-wrapper{
-  text-align: center;
-  padding-top: 2.3rem;
+  @apply text-center pt-6;
 }
+
 .button-wrapper--button{
+  @apply w-[19.2rem] h-12 rounded-[10px] font-bold text-[15px];
   background-color: rgb(255, 145, 0);
-  width: 19rem;
-  height: 3rem;
-  border-radius: 10px;
   color: white;
-  font-weight: bold;
-  font-size: 15px;
-  @apply text-sm font-bold text-[hsl(219,9%,45%)]
 }
 .product-wrapper__icon{
   @apply basis-1/6 flex justify-center
@@ -168,5 +176,21 @@ let whiteBoxFlag = ref(false);
 }
 .header_right-side {
   @apply flex items-center gap-7;
+}
+.menu-left{
+  @apply bg-white py-4 pl-[1.3rem] pr-20 fixed top-0 bottom-0 left-0 z-10 transition-all duration-75;
+}
+.menu-left__icon{
+  @apply pr-8 pt-4 pb-12 
+}
+.menu-left__nav{
+
+}
+
+.menu-left--menu{
+  @apply p-0
+}
+.menu-left--item{
+  @apply mb-8 font-bold
 }
 </style>
