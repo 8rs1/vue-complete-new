@@ -46,7 +46,8 @@ function deleteProductFromBasket(productObj) {
           <li
             v-for="navItem in navItems"
             :key="navItem.id"
-            :class="navItem.className">
+            :class="navItem.className"
+          >
             <RouterLink :to="navItem.target">{{ navItem.title }}</RouterLink>
           </li>
         </ul>
@@ -54,8 +55,9 @@ function deleteProductFromBasket(productObj) {
     </div>
     <div class="header_right-side">
       <cartIcon
-      class="fill-slate-600 icone-sabad select-none cursor-pointer"
-      @click="whiteBoxFlag = !whiteBoxFlag"/>
+        class="fill-slate-600 icone-sabad select-none cursor-pointer"
+        @click="whiteBoxFlag = !whiteBoxFlag"
+      />
       <div v-if="whiteBoxFlag" class="box-white">
         <div class="box-white__top">
           <p class="box-white__top--text">Cart</p>
@@ -67,7 +69,8 @@ function deleteProductFromBasket(productObj) {
             <div
               class="product-wrapper"
               v-for="basketItem in basketItems"
-              :key="basketItem.id"> 
+              :key="basketItem.id"
+            > 
               <div class="product-wrapper__picture">
                 <img
                   :src="'../../..' + basketItem.thumbnail"
@@ -83,7 +86,7 @@ function deleteProductFromBasket(productObj) {
                   ${{
                     (basketItem.price * (basketItem.offer / 100)).toFixed(2)
                   }}
-                  x{{ basketItem.count }} ${{
+                  x {{ basketItem.count }} ${{
                     (basketItem.price * (basketItem.offer / 100)).toFixed(2) *
                     basketItem.count
                   }}
@@ -91,17 +94,20 @@ function deleteProductFromBasket(productObj) {
               </div>
               <div
                 class="product-wrapper__icon group cursor-pointer"
-                @click="deleteProductFromBasket(basketItem)">
-                <bucket className="fill-[#C3CAD9] group-hover:fill-red-500"/>
+                @click="deleteProductFromBasket(basketItem)"
+              >
+                <bucket className="fill-[#C3CAD9] group-hover:fill-red-500" />
               </div>
+            </div>
+            <div class="button-wrapper">
+              <button class="button-wrapper--button">Checkout</button>
             </div>
             <!-- <div class="product-wrapper">
               <div class="product-wrapper__picture">
                 <img
                   src="../../assets/products/product-1/product-thumbnail.jpg"
                   alt=""
-                  class="product-wrapper__picture--img"
-                />
+                  class="product-wrapper__picture--img"/>
               </div>
               <div class="product-wrapper__title-price">
                 <div class="product-wrapper__title">
@@ -114,7 +120,6 @@ function deleteProductFromBasket(productObj) {
               </div>
             </div> -->
           </div>
-          <!-- product wrapper fakee -->
           <!-- <div class="product-wrapper">
             <div class="product-wrapper__picture">
               <img
@@ -131,11 +136,9 @@ function deleteProductFromBasket(productObj) {
               <bucket></bucket>
             </div>
           </div>
-          <div class="button-wrapper">Checkout</div>
           <div class="button-wrapper">
             <button class="button-wrapper--button">Checkout</button>
           </div> -->
-          <!-- product wrapper fakee -->
         </div>
       </div>
       <!-- menu-bar start -->
@@ -166,7 +169,6 @@ function deleteProductFromBasket(productObj) {
 .box-white__bottom--text {
   @apply font-bold text-sm text-[hsl(219,9%,45%)];
 }
-
 /* Card Empty */
 .colors {
   color: hsl(26, 100%, 55%);
@@ -192,12 +194,18 @@ function deleteProductFromBasket(productObj) {
   /* @apply flex items-center flex-col; */
   @apply relative min-h-24;
 }
-.box-white__bottom--text {
+/* .box-white__bottom--text {
   @apply absolute m-auto text-center;
-}
+} */
 .products-wrapper {
   @apply py-3;
 }
+/* .box-white__bottom{
+  height: 80%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}  */
 .product-wrapper {
   @apply flex justify-between items-center mb-2 px-3;
 }
@@ -244,12 +252,12 @@ function deleteProductFromBasket(productObj) {
 }
 
 .button-wrapper--button{
-  @apply w-[19.2rem] h-12 rounded-[10px] font-bold text-[15px];
-  background-color: rgb(255, 145, 0);
+  @apply bg-orange-600 w-[19.2rem] h-14 rounded-[10px] font-bold text-[15px];
+  /* background-color: rgb(255, 145, 0); */
   color: white;
 }
-.button-wrapper {
-  @apply bg-orange-600 text-white mx-4 mb-3 text-center py-2 font-semibold rounded-md;
+.button-wrapper{
+  @apply pt-5 text-white  text-center py-2 font-semibold rounded-md;
 }
 /* Card Shop */
 .header {
@@ -264,9 +272,9 @@ function deleteProductFromBasket(productObj) {
 .nav-list {
   @apply flex gap-x-5;
 }
-.nav-item {
+/* .nav-item {
   @apply text-slate-600 hover:text-black;
-}
+} */
 .header_right-side {
   @apply flex items-center gap-7 relative;
 }
