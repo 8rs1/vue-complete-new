@@ -1,5 +1,5 @@
 <template>
-  <main class="xl:flex gap-x-28 container">
+  <main class="xl:flex gap-x-28 container max-[650px]:px-8 max-[380px]:px-1">
     <div class="flex flex-col items-center">
       <div
         class="col-span-4 relative rounded-xl max-w-[1000px] overflow-hidden aspect-square"

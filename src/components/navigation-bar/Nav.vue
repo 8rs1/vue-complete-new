@@ -3,6 +3,7 @@ import { reactive, ref } from "vue";
 // import { useRoute } from "vue-router";
 import cartIcon from "@/components/svgs/icons/Cart.vue";
 import bucket from "@/components/svgs/icons/Delete.vue";
+import menuH from "@/components/svgs/icons/Menu.vue"
 
 // get data
 const products = JSON.parse(localStorage.getItem("products"));
@@ -51,6 +52,7 @@ function deleteProductFromBasket(productObj) {
             <RouterLink :to="navItem.target">{{ navItem.title }}</RouterLink>
           </li>
         </ul>
+        <menuH class="menu-icon"></menuH>
       </nav>
     </div>
     <div class="header_right-side">
@@ -185,7 +187,9 @@ function deleteProductFromBasket(productObj) {
 /* Card Shop */
 .box-white {
   /* h-52 */
-  @apply bg-white z-10 w-80 shadow-[2px_11px_25px_hsl(220,14%,75%)] rounded-md absolute top-full right-5;
+  @apply bg-white z-10 w-80 shadow-[2px_11px_25px_hsl(220,14%,75%)] rounded-md absolute top-full right-5
+  max-[360px]:absolute top-[4rem] right-[3px] w-[18rem]
+  ;
 }
 .box-white__top {
   @apply flex items-center py-3 pl-6 border-b border-solid border-[hsl(220,14%,75%)];
@@ -255,7 +259,7 @@ function deleteProductFromBasket(productObj) {
 }
 
 .button-wrapper--button{
-  @apply bg-orange-600 w-[19.2rem] h-14 rounded-[10px] font-bold text-[15px];
+  @apply bg-orange-600 w-[85%] h-14 rounded-[10px] font-bold text-[15px];
   /* background-color: rgb(255, 145, 0); */
   color: white;
 }
@@ -264,16 +268,16 @@ function deleteProductFromBasket(productObj) {
 }
 /* Card Shop */
 .header {
-  @apply flex justify-between container py-6 border-b border-solid border-b-slate-400 xl:mb-10;
+  @apply flex justify-between items-center container py-6 border-b border-solid border-b-slate-400 xl:mb-10 mb-8 max-[650px]:px-8 max-[380px]:px-2;
 }
 .header_left-side {
-  @apply flex gap-x-7 items-center;
+  @apply flex gap-x-6 items-center max-[650px]:flex-row-reverse ;
 }
 .logobar {
   @apply font-bold text-2xl font-serif;
 }
 .nav-list {
-  @apply flex gap-x-5;
+  @apply flex gap-x-5 max-[650px]:hidden;
 }
 /* .nav-item {
   @apply text-slate-600 hover:text-black;
@@ -282,7 +286,7 @@ function deleteProductFromBasket(productObj) {
   @apply flex items-center gap-7 relative;
 }
 .menu-left{
-  @apply bg-white py-4 pl-[1.3rem] pr-20 fixed top-0 bottom-0 left-0 z-10 transition-all duration-75;
+  @apply bg-red-700 py-4 pl-[1.3rem] pr-20 fixed top-0 bottom-0 left-[-12rem] z-10 transition-all duration-[1s];
 }
 .menu-left__icon{
   @apply pr-8 pt-4 pb-12 
@@ -293,5 +297,8 @@ function deleteProductFromBasket(productObj) {
 }
 .menu-left--item{
   @apply mb-8 font-bold
+}
+.menu-icon{
+  @apply hidden max-[650px]:block;
 }
 </style>
