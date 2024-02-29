@@ -1,7 +1,13 @@
 <script setup>
 import { reactive, ref } from "vue";
+// import { useRoute } from "vue-router";
 import cartIcon from "@/components/svgs/icons/Cart.vue";
 import bucket from "@/components/svgs/icons/Delete.vue";
+
+// get data
+const products = JSON.parse(localStorage.getItem("products"));
+const basketItems = ref(products.filter((product) => product.count > 0));
+console.log(basketItems.value);
 const navItems = reactive([
   { id: 1, title: "Collections", className: "nav-item", target: "/" },
   { id: 2, title: "Men", className: "nav-item", target: "/" },
@@ -11,6 +17,24 @@ const navItems = reactive([
 ]);
 
 let whiteBoxFlag = ref(false);
+
+function deleteProductFromBasket(productObj) {
+  basketItems.value.forEach((product) => {
+    console.log(product);
+    console.log(productObj);
+    if (product.id === productObj.id) {
+      product.count = 0;
+      console.log(true);
+    }
+  });
+  localStorage.setItem("products", JSON.stringify(basketItems.value));
+
+  // console.log(basketItems);
+  // const product = ref(
+  //   basketItems.value.filter((product) => product == productObj)
+  // );
+  // product.value[0].count = 0;
+}
 </script>
 <template>
   <header class="header">
@@ -30,7 +54,7 @@ let whiteBoxFlag = ref(false);
     </div>
     <div class="header_right-side">
       <cartIcon
-        class="relative fill-slate-600 icone-sabad select-none cursor-pointer"
+        class="fill-slate-600 icone-sabad select-none cursor-pointer"
         @click="whiteBoxFlag = !whiteBoxFlag"
       />
       <div v-if="whiteBoxFlag" class="box-white">
@@ -40,23 +64,60 @@ let whiteBoxFlag = ref(false);
         <div class="box-white__bottom">
           <!-- <p class="box-white__bottom--text">Your cart is empty.</p> -->
           <!-- the top line show when basket is empty -->
-          <div class="product-wrapper">
-            <div class="product-wrapper__picture">
-              <img
-                src="../../assets/products/product-1/product-thumbnail.jpg"
-                alt=""
-                class="product-wrapper__picture--img"
-              />
+          <div class="products-wrapper">
+            <div
+              class="product-wrapper"
+              v-for="basketItem in basketItems"
+              :key="basketItem.id"
+            >
+              <div class="product-wrapper__picture">
+                <img
+                  :src="'../../..' + basketItem.thumbnail"
+                  :alt="basketItem.title"
+                  class="product-wrapper__picture--img"
+                />
+              </div>
+              <div class="product-wrapper__title-price">
+                <div class="product-wrapper__title">
+                  {{ basketItem.title }}
+                </div>
+                <div class="product-wrapper__price">
+                  ${{
+                    (basketItem.price * (basketItem.offer / 100)).toFixed(2)
+                  }}
+                  x {{ basketItem.count }} ${{
+                    (basketItem.price * (basketItem.offer / 100)).toFixed(2) *
+                    basketItem.count
+                  }}
+                </div>
+              </div>
+              <div
+                class="product-wrapper__icon group cursor-pointer"
+                @click="deleteProductFromBasket(basketItem)"
+              >
+                <bucket className="fill-[#C3CAD9] group-hover:fill-red-500" />
+              </div>
             </div>
-            <div class="product-wrapper__title-price">
-              <div class="product-wrapper__title">fall limited edition sneakers</div>
-              <div class="product-wrapper__price">$125.00 * 3 $375.00</div>
-            </div>
-            <div class="product-wrapper__icon">
-              <bucket></bucket>
-            </div>
+            <!-- <div class="product-wrapper">
+              <div class="product-wrapper__picture">
+                <img
+                  src="../../assets/products/product-1/product-thumbnail.jpg"
+                  alt=""
+                  class="product-wrapper__picture--img"
+                />
+              </div>
+              <div class="product-wrapper__title-price">
+                <div class="product-wrapper__title">
+                  fall limited edition sneakers
+                </div>
+                <div class="product-wrapper__price">$125.00 x 3 $375.00</div>
+              </div>
+              <div class="product-wrapper__icon">
+                <bucket fill="" />
+              </div>
+            </div> -->
           </div>
-          <div class="button-wrapper"></div>
+          <div class="button-wrapper">Checkout</div>
         </div>
       </div>
       <div>
@@ -84,37 +145,42 @@ let whiteBoxFlag = ref(false);
 }
 /* Card Shop */
 .box-white {
-  @apply bg-white w-80 h-52 shadow-[2px_11px_25px_hsl(220,14%,75%)] rounded-md absolute  top-20 right-5;
+  /* h-52 */
+  @apply bg-white z-10 w-80 shadow-[2px_11px_25px_hsl(220,14%,75%)] rounded-md absolute top-full right-5;
 }
 .box-white__top {
-  @apply flex items-center h-1/5 pl-6 border-b border-solid border-[hsl(220,14%,75%)];
+  @apply flex items-center py-3 pl-6 border-b border-solid border-[hsl(220,14%,75%)];
 }
 .box-white__top--text {
   @apply font-bold;
 }
-.box-white__bottom{
-  @apply h-4/5 flex items-center flex-col
-} 
-.product-wrapper{
-  @apply pt-4 flex justify-around items-center w-80
+.box-white__bottom {
+  /* @apply flex items-center flex-col; */
+  @apply relative min-h-24;
 }
-.product-wrapper__picture{
-  @apply basis-2/12 rounded-md overflow-hidden
+.box-white__bottom--text {
+  @apply absolute m-auto text-center;
 }
-.box-white__bottom{
-  @apply flex justify-center items-center h-4/5;
+.products-wrapper {
+  @apply py-3;
+}
+.product-wrapper {
+  @apply flex justify-between items-center mb-2 px-3;
+}
+.product-wrapper__picture {
+  @apply basis-12 rounded-md overflow-hidden;
 }
 .product-wrapper__picture--img {
   @apply w-full;
 }
-.product-wrapper__title-price{
-  @apply flex flex-col basis-1/2 
+.product-wrapper__title {
+  @apply text-sm font-bold text-[hsl(219,9%,45%)];
 }
-.product-wrapper__title{
-  @apply text-sm font-bold text-[hsl(219,9%,45%)]
+.product-wrapper__icon {
+  @apply flex justify-center;
 }
-.product-wrapper__icon{
-  @apply basis-1/6 flex justify-center
+.button-wrapper {
+  @apply bg-orange-600 text-white mx-4 mb-3 text-center py-2 font-semibold rounded-md;
 }
 /* Card Shop */
 .header {
@@ -133,6 +199,6 @@ let whiteBoxFlag = ref(false);
   @apply text-slate-600 hover:text-black;
 }
 .header_right-side {
-  @apply flex items-center gap-7;
+  @apply flex items-center gap-7 relative;
 }
 </style>
