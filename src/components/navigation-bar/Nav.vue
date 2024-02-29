@@ -8,6 +8,7 @@ import bucket from "@/components/svgs/icons/Delete.vue";
 const products = JSON.parse(localStorage.getItem("products"));
 const basketItems = ref(products.filter((product) => product.count > 0));
 console.log(basketItems.value);
+import close from "@/components/svgs/icons/Close.vue";
 const navItems = reactive([
   { id: 1, title: "Collections", className: "nav-item", target: "/" },
   { id: 2, title: "Men", className: "nav-item", target: "/" },
@@ -116,10 +117,44 @@ function deleteProductFromBasket(productObj) {
                 <bucket fill="" />
               </div>
             </div> -->
+          <div class="product-wrapper">
+            <div class="product-wrapper__picture">
+              <img
+                src="../../assets/products/product-1/product-thumbnail.jpg"
+                alt=""
+                class="product-wrapper__picture--img"
+              />
+            </div>
+            <div class="product-wrapper__title-price">
+              <div class="product-wrapper__title">fall limited edition sneakers</div>
+              <div class="product-wrapper__price"><span class="product-wrapper__title">$125.00 * 3<span class="product-wrapper__price--bold">$375.00</span></span></div>
+            </div>
+            <div class="product-wrapper__icon">
+              <bucket></bucket>
+            </div>
           </div>
           <div class="button-wrapper">Checkout</div>
+          <div class="button-wrapper">
+            <button class="button-wrapper--button">Checkout</button>
+          </div>
         </div>
       </div>
+      <!-- menu-bar start -->
+      <div class="menu-left">
+        <div class="menu-left__icon">
+          <close></close>
+        </div>
+        <div class="menu-left__nav">
+          <ul class="menu-left--menu">
+            <li class="menu-left--item">Collections</li>
+            <li class="menu-left--item">Men</li>
+            <li class="menu-left--item">Women</li>
+            <li class="menu-left--item">About</li>
+            <li class="menu-left--item">Contact</li>
+          </ul>
+        </div>
+      </div>
+      <!-- menu-bar end -->
       <div>
         <img src="@/assets/avatars/avatar-1.png" class="w-12" />
       </div>
@@ -166,18 +201,56 @@ function deleteProductFromBasket(productObj) {
 }
 .product-wrapper {
   @apply flex justify-between items-center mb-2 px-3;
+/* .box-white__bottom{
+  height: 80%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}  */
+.box-white__bottom{
+  @apply h-4/5 flex items-center flex-col
+} 
+.product-wrapper{
+  @apply pt-4 flex justify-around items-center w-80
 }
 .product-wrapper__picture {
   @apply basis-12 rounded-md overflow-hidden;
+}
+.product-wrapper__picture{
+  @apply basis-2/12 rounded-md overflow-hidden
 }
 .product-wrapper__picture--img {
   @apply w-full;
 }
 .product-wrapper__title {
   @apply text-sm font-bold text-[hsl(219,9%,45%)];
+.product-wrapper__title-price{
+  @apply flex flex-col basis-[53%]; 
 }
 .product-wrapper__icon {
   @apply flex justify-center;
+.product-wrapper__title{
+  @apply text-[14px]; 
+  color: hsl(219, 9%, 45%);
+}
+.product-wrapper__price{
+  
+}
+.product-wrapper__price--bold{
+  @apply font-bold ml-[5px];
+  color: black;
+}
+.product-wrapper__icon{
+  @apply basis-[15%] flex justify-center;
+}
+.button-wrapper{
+  @apply text-center pt-6;
+}
+
+.button-wrapper--button{
+  @apply w-[19.2rem] h-12 rounded-[10px] font-bold text-[15px];
+  background-color: rgb(255, 145, 0);
+  color: white;
 }
 .button-wrapper {
   @apply bg-orange-600 text-white mx-4 mb-3 text-center py-2 font-semibold rounded-md;
@@ -200,5 +273,21 @@ function deleteProductFromBasket(productObj) {
 }
 .header_right-side {
   @apply flex items-center gap-7 relative;
+}
+.menu-left{
+  @apply bg-white py-4 pl-[1.3rem] pr-20 fixed top-0 bottom-0 left-0 z-10 transition-all duration-75;
+}
+.menu-left__icon{
+  @apply pr-8 pt-4 pb-12 
+}
+.menu-left__nav{
+
+}
+
+.menu-left--menu{
+  @apply p-0
+}
+.menu-left--item{
+  @apply mb-8 font-bold
 }
 </style>
