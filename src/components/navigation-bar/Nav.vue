@@ -201,6 +201,7 @@ function deleteProductFromBasket(productObj) {
 }
 .product-wrapper {
   @apply flex justify-between items-center mb-2 px-3;
+}
 /* .box-white__bottom{
   height: 80%;
   display: flex;
@@ -224,11 +225,13 @@ function deleteProductFromBasket(productObj) {
 }
 .product-wrapper__title {
   @apply text-sm font-bold text-[hsl(219,9%,45%)];
+}
 .product-wrapper__title-price{
   @apply flex flex-col basis-[53%]; 
 }
 .product-wrapper__icon {
   @apply flex justify-center;
+}
 .product-wrapper__title{
   @apply text-[14px]; 
   color: hsl(219, 9%, 45%);
@@ -279,9 +282,6 @@ function deleteProductFromBasket(productObj) {
 }
 .menu-left__icon{
   @apply pr-8 pt-4 pb-12 
-}
-.menu-left__nav{
-
 }
 
 .menu-left--menu{
