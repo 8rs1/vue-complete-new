@@ -3,12 +3,15 @@ import { reactive, ref } from "vue";
 // import { useRoute } from "vue-router";
 import cartIcon from "@/components/svgs/icons/Cart.vue";
 import bucket from "@/components/svgs/icons/Delete.vue";
-import menuH from "@/components/svgs/icons/Menu.vue"
+import menuH from "@/components/svgs/icons/Menu.vue";
 
 // get data
 const products = JSON.parse(localStorage.getItem("products"));
-const basketItems = ref(products.filter((product) => product.count > 0));
-console.log(basketItems.value);
+// onMounted(() => {
+//   // el.value // <div>
+//   const basketItems = ref(products.filter((product) => product.count > 0));
+//   console.log(basketItems.value);
+// });
 import close from "@/components/svgs/icons/Close.vue";
 const navItems = reactive([
   { id: 1, title: "Collections", className: "nav-item", target: "/" },
@@ -72,13 +75,13 @@ function deleteProductFromBasket(productObj) {
               class="product-wrapper"
               v-for="basketItem in basketItems"
               :key="basketItem.id"
-            > 
+            >
               <div class="product-wrapper__picture">
                 <img
                   :src="'../../..' + basketItem.thumbnail"
                   :alt="basketItem.title"
                   class="product-wrapper__picture--img"
-                  />
+                />
               </div>
               <div class="product-wrapper__title-price">
                 <div class="product-wrapper__title">
@@ -101,7 +104,8 @@ function deleteProductFromBasket(productObj) {
                 <bucket className="fill-[#C3CAD9] group-hover:fill-red-500" />
               </div>
             </div>
-            <div class="button-wrapper" 
+            <div
+              class="button-wrapper"
               v-for="basketItem in basketItems"
               :key="basketItem.id"
             >
@@ -149,7 +153,7 @@ function deleteProductFromBasket(productObj) {
       <!-- menu-bar start -->
       <div class="menu-left">
         <div class="menu-left__icon">
-          <close></close>
+          <close />
         </div>
         <div class="menu-left__nav">
           <ul class="menu-left--menu">
@@ -188,8 +192,7 @@ function deleteProductFromBasket(productObj) {
 .box-white {
   /* h-52 */
   @apply bg-white z-10 w-80 shadow-[2px_11px_25px_hsl(220,14%,75%)] rounded-md absolute top-full right-5
-  max-[360px]:absolute top-[4rem] right-[3px] w-[18rem]
-  ;
+  max-[360px]:absolute top-[4rem] right-[3px] w-[18rem];
 }
 .box-white__top {
   @apply flex items-center py-3 pl-6 border-b border-solid border-[hsl(220,14%,75%)];
@@ -216,17 +219,17 @@ function deleteProductFromBasket(productObj) {
 .product-wrapper {
   @apply flex justify-between items-center mb-2 px-3;
 }
-.box-white__bottom{
-  @apply h-4/5 flex items-center flex-col
-} 
-.product-wrapper{
-  @apply pt-4 flex justify-around items-center w-80
+.box-white__bottom {
+  @apply h-4/5 flex items-center flex-col;
+}
+.product-wrapper {
+  @apply pt-4 flex justify-around items-center w-80;
 }
 .product-wrapper__picture {
   @apply basis-12 rounded-md overflow-hidden;
 }
-.product-wrapper__picture{
-  @apply basis-2/12 rounded-md overflow-hidden
+.product-wrapper__picture {
+  @apply basis-2/12 rounded-md overflow-hidden;
 }
 .product-wrapper__picture--img {
   @apply w-full;
@@ -234,36 +237,35 @@ function deleteProductFromBasket(productObj) {
 .product-wrapper__title {
   @apply text-sm font-bold text-[hsl(219,9%,45%)];
 }
-.product-wrapper__title-price{
-  @apply flex flex-col basis-[53%]; 
+.product-wrapper__title-price {
+  @apply flex flex-col basis-[53%];
 }
 .product-wrapper__icon {
   @apply flex justify-center;
 }
-.product-wrapper__title{
-  @apply text-[14px]; 
+.product-wrapper__title {
+  @apply text-[14px];
   color: hsl(219, 9%, 45%);
 }
-.product-wrapper__price{
-  
+.product-wrapper__price {
 }
-.product-wrapper__price--bold{
+.product-wrapper__price--bold {
   @apply font-bold ml-[5px];
   color: black;
 }
-.product-wrapper__icon{
+.product-wrapper__icon {
   @apply basis-[15%] flex justify-center;
 }
-.button-wrapper{
+.button-wrapper {
   @apply text-center pt-6;
 }
 
-.button-wrapper--button{
+.button-wrapper--button {
   @apply bg-orange-600 w-[85%] h-14 rounded-[10px] font-bold text-[15px];
   /* background-color: rgb(255, 145, 0); */
   color: white;
 }
-.button-wrapper{
+.button-wrapper {
   @apply pt-5 text-white  text-center py-2 font-semibold rounded-md;
 }
 /* Card Shop */
@@ -271,7 +273,7 @@ function deleteProductFromBasket(productObj) {
   @apply flex justify-between items-center container py-6 border-b border-solid border-b-slate-400 xl:mb-10 mb-8 max-[650px]:px-8 max-[380px]:px-2;
 }
 .header_left-side {
-  @apply flex gap-x-6 items-center max-[650px]:flex-row-reverse ;
+  @apply flex gap-x-6 items-center max-[650px]:flex-row-reverse;
 }
 .logobar {
   @apply font-bold text-2xl font-serif;
@@ -285,20 +287,20 @@ function deleteProductFromBasket(productObj) {
 .header_right-side {
   @apply flex items-center gap-7 relative;
 }
-.menu-left{
+.menu-left {
   @apply bg-red-700 py-4 pl-[1.3rem] pr-20 fixed top-0 bottom-0 left-[-12rem] z-10 transition-all duration-[1s];
 }
-.menu-left__icon{
-  @apply pr-8 pt-4 pb-12 
+.menu-left__icon {
+  @apply pr-8 pt-4 pb-12;
 }
 
-.menu-left--menu{
-  @apply p-0
+.menu-left--menu {
+  @apply p-0;
 }
-.menu-left--item{
-  @apply mb-8 font-bold
+.menu-left--item {
+  @apply mb-8 font-bold;
 }
-.menu-icon{
+.menu-icon {
   @apply hidden max-[650px]:block;
 }
 </style>
