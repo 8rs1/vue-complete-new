@@ -20,7 +20,7 @@ const navItems = reactive([
   { id: 5, title: "Contact", className: "nav-item", target: "/" },
 ]);
 
-let whiteBoxFlag = ref(false);
+let basketFlag = ref(false);
 
 function deleteProductFromBasket(productObj) {
   basketItems.value.forEach((product) => {
@@ -44,8 +44,11 @@ const menuFlag = ref(false);
 <template>
   <header class="header">
     <div class="header_left-side">
-      <Transition>
-        <div class="menu-left bg-red-700 py-4 pl-[1.3rem] pr-20 fixed left-0 bottom-0 top-0 z-20" v-if="menuFlag">
+      <Transition name="fade-shadow">
+        <div class="fixed inset-0 bg-slate-700/40 z-20" v-if="menuFlag" @click="menuFlag = !menuFlag"></div>
+      </Transition>
+      <Transition name="fade-menu">
+        <div class="menu-left bg-[hsl(223,64%,98%)] py-4 pl-[1.3rem] pr-20 fixed left-0 bottom-0 top-0 z-30" v-if="menuFlag">
           <div class="menu-left__icon" @click="menuFlag = !menuFlag">
             <close />
           </div>
@@ -79,9 +82,12 @@ const menuFlag = ref(false);
     <div class="header_right-side">
       <cartIcon
         class="fill-slate-600 icone-sabad select-none cursor-pointer"
-        @click="whiteBoxFlag = !whiteBoxFlag"
+        @click="basketFlag = !basketFlag"
       />
-      <div v-if="whiteBoxFlag" class="box-white">
+      <Transition name="fade-shadow">
+        <div class="fixed inset-0 bg-transparent z-10" v-if="basketFlag" @click="basketFlag=!basketFlag"></div>
+      </Transition>
+      <div v-if="basketFlag" class="box-white">
         <div class="box-white__top">
           <p class="box-white__top--text">Cart</p>
         </div>
@@ -182,13 +188,19 @@ const menuFlag = ref(false);
 </template>
 <style scoped>
 /* transition */
-.v-enter-active,
-.v-leave-active {
+.fade-menu-enter-active,
+.fade-menu-leave-active,
+.fade-shadow-enter-active,
+.fade-shadow-leave-active {
   @apply transition-all duration-300 ease-linear;
 }
-.v-enter-from,
-.v-leave-to {
+.fade-menu-enter-from,
+.fade-menu-leave-to {
   @apply -left-40;
+}
+.fade-shadow-enter-from,
+.fade-shadow-leave-to {
+  @apply bg-transparent
 }
 /* .v-enter-to,
 .v-leave-from {
