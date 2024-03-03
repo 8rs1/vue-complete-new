@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref,onMounted } from "vue";
+import { reactive, ref, onMounted } from "vue";
 // import { useRoute } from "vue-router";
 import cartIcon from "@/components/svgs/icons/Cart.vue";
 import bucket from "@/components/svgs/icons/Delete.vue";
@@ -7,9 +7,9 @@ import menuH from "@/components/svgs/icons/Menu.vue";
 // get data
 const products = JSON.parse(localStorage.getItem("products"));
 // onMounted(() => {
-  // el.value // <div>
-  const basketItems = ref(products.filter((product) => product.count > 0));
-  console.log(basketItems.value);
+// el.value // <div>
+const basketItems = ref(products.filter((product) => product.count > 0));
+console.log(basketItems.value);
 // });
 import close from "@/components/svgs/icons/Close.vue";
 const navItems = reactive([
@@ -44,6 +44,22 @@ const menuFlag = ref(false);
 <template>
   <header class="header">
     <div class="header_left-side">
+      <Transition>
+        <div class="menu-left bg-red-700 py-4 pl-[1.3rem] pr-20 fixed left-0 bottom-0 top-0 z-20" v-if="menuFlag">
+          <div class="menu-left__icon" @click="menuFlag = !menuFlag">
+            <close />
+          </div>
+          <div class="menu-left__nav">
+            <ul class="menu-left--menu">
+              <li class="menu-left--item">Collections</li>
+              <li class="menu-left--item">Men</li>
+              <li class="menu-left--item">Women</li>
+              <li class="menu-left--item">About</li>
+              <li class="menu-left--item">Contact</li>
+            </ul>
+          </div>
+        </div>
+      </Transition>
       <div class="logobar">sneakers</div>
       <nav>
         <ul class="nav-list">
@@ -55,7 +71,7 @@ const menuFlag = ref(false);
             <RouterLink :to="navItem.target">{{ navItem.title }}</RouterLink>
           </li>
         </ul>
-        <div @click="menuFlag = true">
+        <div @click="menuFlag = !menuFlag">
           <menuH class="menu-icon" />
         </div>
       </nav>
@@ -94,8 +110,10 @@ const menuFlag = ref(false);
                     (basketItem.price * (basketItem.offer / 100)).toFixed(2)
                   }}
                   x {{ basketItem.count }} ${{
-                    ((basketItem.price * (basketItem.offer / 100)).toFixed(2) *
-                    basketItem.count).toFixed(2)
+                    (
+                      (basketItem.price * (basketItem.offer / 100)).toFixed(2) *
+                      basketItem.count
+                    ).toFixed(2)
                   }}
                 </div>
               </div>
@@ -155,22 +173,6 @@ const menuFlag = ref(false);
         </div>
       </div>
       <!-- menu-bar start -->
-      <transition name="showmenu">
-        <div class="menu-left" v-if="menuFlag">
-        <div class="menu-left__icon" @click="menuFlag = false">
-          <close />
-        </div>
-        <div class="menu-left__nav">
-          <ul class="menu-left--menu">
-            <li class="menu-left--item">Collections</li>
-            <li class="menu-left--item">Men</li>
-            <li class="menu-left--item">Women</li>
-            <li class="menu-left--item">About</li>
-            <li class="menu-left--item">Contact</li>
-          </ul>
-        </div>
-      </div>
-      </transition>
       <!-- menu-bar end -->
       <div>
         <img src="@/assets/avatars/avatar-1.png" class="w-12" />
@@ -180,18 +182,18 @@ const menuFlag = ref(false);
 </template>
 <style scoped>
 /* transition */
-.showmenu-enter-active,
-.showmenu-leave-active {
-  transition: all 0.5s ease;
+.v-enter-active,
+.v-leave-active {
+  @apply transition-all duration-300 ease-linear;
 }
-.showmenu-enter-from{
-  @apply -left-12
+.v-enter-from,
+.v-leave-to {
+  @apply -left-40;
 }
-.showmenu-leave-to {
+/* .v-enter-to,
+.v-leave-from {
   @apply left-0
-}
-
-
+} */
 /* Card Empty */
 
 .box-white__bottom--text {
@@ -306,9 +308,9 @@ const menuFlag = ref(false);
 .header_right-side {
   @apply flex items-center gap-7 relative;
 }
-.menu-left {
-  @apply bg-red-700 py-4 pl-[1.3rem] pr-20 fixed top-0 bottom-0 left-0 z-10 transition-all duration-[1s];
-}
+/* .menu-left {
+  @apply bg-red-700 py-4 pl-[1.3rem] pr-20 fixed left-0 bottom-0 top-0 z-10;
+} */
 .menu-left__icon {
   @apply mr-8 mt-4 mb-12 w-fit aspect-square;
 }
