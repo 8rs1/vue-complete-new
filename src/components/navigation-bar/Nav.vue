@@ -1,16 +1,15 @@
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref,onMounted } from "vue";
 // import { useRoute } from "vue-router";
 import cartIcon from "@/components/svgs/icons/Cart.vue";
 import bucket from "@/components/svgs/icons/Delete.vue";
 import menuH from "@/components/svgs/icons/Menu.vue";
-
 // get data
 const products = JSON.parse(localStorage.getItem("products"));
 // onMounted(() => {
-//   // el.value // <div>
-//   const basketItems = ref(products.filter((product) => product.count > 0));
-//   console.log(basketItems.value);
+  // el.value // <div>
+  const basketItems = ref(products.filter((product) => product.count > 0));
+  console.log(basketItems.value);
 // });
 import close from "@/components/svgs/icons/Close.vue";
 const navItems = reactive([
@@ -301,6 +300,6 @@ function deleteProductFromBasket(productObj) {
   @apply mb-8 font-bold;
 }
 .menu-icon {
-  @apply hidden max-[650px]:block;
+  @apply sm:hidden block;
 }
 </style>
