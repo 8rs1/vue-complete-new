@@ -39,6 +39,7 @@ function deleteProductFromBasket(productObj) {
   // );
   // product.value[0].count = 0;
 }
+const menuFlag = ref(false);
 </script>
 <template>
   <header class="header">
@@ -54,7 +55,9 @@ function deleteProductFromBasket(productObj) {
             <RouterLink :to="navItem.target">{{ navItem.title }}</RouterLink>
           </li>
         </ul>
-        <menuH class="menu-icon"></menuH>
+        <div @click="menuFlag = true">
+          <menuH class="menu-icon" />
+        </div>
       </nav>
     </div>
     <div class="header_right-side">
@@ -91,8 +94,8 @@ function deleteProductFromBasket(productObj) {
                     (basketItem.price * (basketItem.offer / 100)).toFixed(2)
                   }}
                   x {{ basketItem.count }} ${{
-                    (basketItem.price * (basketItem.offer / 100)).toFixed(2) *
-                    basketItem.count
+                    ((basketItem.price * (basketItem.offer / 100)).toFixed(2) *
+                    basketItem.count).toFixed(2)
                   }}
                 </div>
               </div>
@@ -108,7 +111,9 @@ function deleteProductFromBasket(productObj) {
               v-for="basketItem in basketItems"
               :key="basketItem.id"
             >
-              <button class="button-wrapper--button">Checkout</button>
+              <RouterLink to="/checkout">
+                <button class="button-wrapper--button">Checkout</button>
+              </RouterLink>
             </div>
             <!-- <div class="product-wrapper">
               <div class="product-wrapper__picture">
@@ -150,8 +155,9 @@ function deleteProductFromBasket(productObj) {
         </div>
       </div>
       <!-- menu-bar start -->
-      <div class="menu-left">
-        <div class="menu-left__icon">
+      <transition name="showmenu">
+        <div class="menu-left" v-if="menuFlag">
+        <div class="menu-left__icon" @click="menuFlag = false">
           <close />
         </div>
         <div class="menu-left__nav">
@@ -164,6 +170,7 @@ function deleteProductFromBasket(productObj) {
           </ul>
         </div>
       </div>
+      </transition>
       <!-- menu-bar end -->
       <div>
         <img src="@/assets/avatars/avatar-1.png" class="w-12" />
@@ -172,6 +179,19 @@ function deleteProductFromBasket(productObj) {
   </header>
 </template>
 <style scoped>
+/* transition */
+.showmenu-enter-active,
+.showmenu-leave-active {
+  transition: all 0.5s ease;
+}
+.showmenu-enter-from{
+  @apply -left-12
+}
+.showmenu-leave-to {
+  @apply left-0
+}
+
+
 /* Card Empty */
 
 .box-white__bottom--text {
@@ -287,10 +307,10 @@ function deleteProductFromBasket(productObj) {
   @apply flex items-center gap-7 relative;
 }
 .menu-left {
-  @apply bg-red-700 py-4 pl-[1.3rem] pr-20 fixed top-0 bottom-0 left-[-12rem] z-10 transition-all duration-[1s];
+  @apply bg-red-700 py-4 pl-[1.3rem] pr-20 fixed top-0 bottom-0 left-0 z-10 transition-all duration-[1s];
 }
 .menu-left__icon {
-  @apply pr-8 pt-4 pb-12;
+  @apply mr-8 mt-4 mb-12 w-fit aspect-square;
 }
 
 .menu-left--menu {
