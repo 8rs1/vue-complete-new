@@ -8,8 +8,8 @@ import menuH from "@/components/svgs/icons/Menu.vue";
 const products = JSON.parse(localStorage.getItem("products"));
 // onMounted(() => {
 // el.value // <div>
-const basketItems = ref(products.filter((product) => product.count > 0));
-console.log(basketItems.value);
+// const basketItems = ref(products.filter((product) => product.count > 0));
+// console.log(basketItems.value);
 // });
 import close from "@/components/svgs/icons/Close.vue";
 const navItems = reactive([
